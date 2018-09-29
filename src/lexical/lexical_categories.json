@@ -1,0 +1,15 @@
+{
+    "categories": [{
+        "token": "id",
+        "regex": "(_|[A-Za-z])(_|[A-Za-z]|[0-9])*",
+        "action": "check_value"
+    }],
+
+    "language_words": [{
+        "pattern": "bend",
+        "token": "reserved"
+    }, {
+        "pattern": "appa",
+        "token": "type"
+    }]
+}
