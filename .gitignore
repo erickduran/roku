@@ -105,3 +105,6 @@ venv.bak/
 
 # Editor files
 .vscode
+
+# PyCharm stuff
+.idea/
