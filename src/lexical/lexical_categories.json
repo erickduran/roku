@@ -3,13 +3,16 @@
         "token": "id",
         "regex": "(_|[A-Za-z])(_|[A-Za-z]|[0-9])*",
         "action": "check_value"
-    }],
+    }, {
+        "token": "delimiter",
+        "regex": ";"
+        }],
 
     "language_words": [{
-        "pattern": "bend",
-        "token": "reserved"
+        "token": "reserved",
+        "pattern": "bend"
     }, {
-        "pattern": "appa",
-        "token": "type"
+        "token": "type",
+        "pattern": "appa"
     }]
 }
