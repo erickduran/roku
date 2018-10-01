@@ -1,10 +1,10 @@
 {
     "categories": [{
-        "token": "id",
+        "token": "identifier",
         "regex": "(_|[A-Za-z])(_|[A-Za-z]|[0-9])*",
         "action": "check_value"
     }, {
-        "token": "delimiter",
+        "token": "line_end",
         "regex": ";"
         }],
 

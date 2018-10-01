@@ -4,8 +4,8 @@ import re
 
 class LexicalAnalyser:
     def __init__(self):
-        self.symbol_table = []
-        self.categories = []
+        self.__symbol_table = []
+        self.__categories = []
 
     def parse_input(self, source_code):
         file = open(source_code, 'r').read()
@@ -47,11 +47,11 @@ class LexicalAnalyser:
                     i += 1
         pass
 
-    def add_to_symbol_table(self, token):
+    def add_to___symbol_table(self, token):
         pass
 
     def check_symbol(self, string):
-        for category in self.categories['categories']:
+        for category in self.__categories['categories']:
             match_result = re.match(category['regex'], string)
 
             if match_result is not None:
@@ -68,12 +68,12 @@ class LexicalAnalyser:
         return None
 
     def check_in_words(self, string):
-        for word in self.categories['language_words']:
+        for word in self.__categories['language_words']:
             if string == word['pattern']:
                 return word
         return None
 
     def load_categories(self, path):
         file = open(path, 'r')
-        self.categories = json.load(file)
+        self.__categories = json.load(file)
         pass
