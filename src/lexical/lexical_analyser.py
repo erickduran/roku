@@ -39,7 +39,15 @@ class LexicalAnalyser:
                     last_correct_string = ''
                     last_correct_category = ''
                 else:
-                    print("'" + current_string + "'" + ' was not found in categories')
+                    # just for dev
+                    if current_string == ' ':
+                        print ('space found')
+                    elif current_string == '\t':
+                        print ('tab found')
+                    elif current_string == '\n':
+                        print ('tab found')
+                    else:
+                        print("'" + current_string + "'" + ' was not found in categories')
 
                     current_string = ''
                     last_correct_string = ''
@@ -69,8 +77,10 @@ class LexicalAnalyser:
 
     def check_in_words(self, string):
         for word in self.__categories['language_words']:
-            if string == word['pattern']:
-                return word
+            match_result = re.match(word['regex'], string)
+            if match_result != None:
+                if match_result.start() == 0 and match_result.end() == len(string):
+                    return word
         return None
 
     def load_categories(self, path):

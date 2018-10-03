@@ -48,13 +48,22 @@
     }, {
         "token": "wan",
         "regex": "'.'"
-        }],
+    }, {
+        "token": "incomplete_appa",
+        "regex": "-?[0-9]+\\."
+    }, {
+        "token": "incomplete_scroll",
+        "regex": "\"[^\"]*"
+    }, {
+        "token": "scroll_delimiter",
+        "regex": "\""
+    }],
 
     "language_words": [{
         "token": "reserved",
-        "pattern": "agni|kai|avatar|raava|cabbage|yipyip|energy|bend"
+        "regex": "agni|kai|avatar|raava|cabbage|yipyip|energy|bend"
     }, {
         "token": "type",
-        "pattern": "zhuli|appa|koi|scroll|wan"
+        "regex": "zhuli|appa|koi|scroll|wan"
     }]
 }
