@@ -3,88 +3,100 @@
         "token": "identifier",
         "regex": "(_|[A-Za-z])(_|[A-Za-z]|[0-9])*",
         "action": "check_value",
-        "unique": false
+        "is_unique": false
     }, {
         "token": "line_end",
         "regex": ";",
-        "unique": true
+        "is_unique": true
     }, {
         "token": "op_arit",
         "regex": "\\+|\\-|\\*|\\/",
-        "unique": false
+        "is_unique": false
+    }, {
+        "token": "op_not",
+        "regex": "!",
+        "is_unique": true
     }, {
         "token": "op_log",
-        "regex": "\\|\\||&&|!",
-        "unique": false
+        "regex": "\\|\\||&&",
+        "is_unique": false
     }, {
         "token": "op_comp",
         "regex": "==|!=|<=|>=|>|<",
-        "unique": false
+        "is_unique": false
     }, {
         "token": "asig",
         "regex": "=",
-        "unique": true
+        "is_unique": true
     }, {
         "token": "zhuli",
         "regex": "-?[0-9]+",
-        "unique": false
+        "is_unique": false
     }, {
         "token": "appa",
         "regex": "-?[0-9]+\\.[0-9]+",
-        "unique": false
+        "is_unique": false
     }, {
         "token": "arg_start",
         "regex": "\\(",
-        "unique": true
+        "is_unique": true
     }, {
         "token": "arg_end",
         "regex": "\\)",
-        "unique": true
+        "is_unique": true
     }, {
-        "token": "program_start",
+        "token": "block_start",
         "regex": "{",
-        "unique": true
+        "is_unique": true
     }, {
-        "token": "program_end",
+        "token": "block_end",
         "regex": "}",
-        "unique": true
+        "is_unique": true
     }, {
         "token": "scroll",
         "regex": "\".*\"",
-        "unique": false
+        "is_unique": false
     }, {
         "token": "wan",
         "regex": "'.'",
-        "unique": false
+        "is_unique": false
     }, {
         "token": "incomplete_appa",
         "regex": "-?[0-9]+\\.",
-        "unique": false
+        "is_unique": false
     }, {
-        "token": "incomplete_scroll",
-        "regex": "\"[^\"]*",
-        "unique": false
+        "token": "incomplete_scroll_wan",
+        "regex": "\"[^\"]*|'.",
+        "is_unique": false
     }, {
-        "token": "scroll_delimiter",
-        "regex": "\"",
-        "unique": false
+        "token": "scroll_wan_delimiter",
+        "regex": "\"|'",
+        "is_unique": false
+    },{
+        "token": "incomplete_op_log",
+        "regex": "\\||&",
+        "is_unique": false
     }],
 
     "language_words": [{
         "token": "reserved",
         "regex": "agni|kai|avatar|raava|cabbage|yipyip|energy|bend",
-        "unique": false
+        "is_unique": false
     }, {
         "token": "type",
         "regex": "zhuli|appa|koi|scroll|wan",
-        "unique": false
+        "is_unique": false
     }, {
         "token": "koi",
         "regex": "tui|la",
-        "unique": false
+        "is_unique": false
     }, {
         "token": "null",
         "regex": "sokka",
-        "unique": true
-    }]
+        "is_unique": true
+    }],
+
+    "spaces": {
+        "regex": "\\s"
+    }
 }
