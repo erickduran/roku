@@ -72,10 +72,18 @@
         "token": "scroll_wan_delimiter",
         "regex": "\"|'",
         "is_unique": false
-    },{
+    }, {
         "token": "incomplete_op_log",
         "regex": "\\||&",
         "is_unique": false
+    }, {
+        "token": "colon",
+        "regex": ":",
+        "is_unique": true
+    }, {
+        "token": "comma",
+        "regex": ",",
+        "is_unique": true
     }],
 
     "language_words": [{

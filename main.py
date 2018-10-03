@@ -1,3 +1,10 @@
+# main.py
+# lexical_analyser.py
+"""This is main class for running the roku language compiler.
+
+- TODO
+
+"""
 from src.lexical.lexical_analyser import LexicalAnalyser
 
 

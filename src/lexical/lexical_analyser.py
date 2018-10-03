@@ -1,3 +1,9 @@
+# lexical_analyser.py
+"""This is the lexical analyser for the roku programming language.
+
+- TODO
+
+"""
 import json
 import re
 
@@ -13,6 +19,7 @@ class LexicalAnalyser:
         pass
 
     def parse_input(self, source_code):
+        self.__tuples = []
         file = open(source_code, 'r').read()
 
         current_string = ''
