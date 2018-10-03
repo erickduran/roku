@@ -2,68 +2,89 @@
     "categories": [{
         "token": "identifier",
         "regex": "(_|[A-Za-z])(_|[A-Za-z]|[0-9])*",
-        "action": "check_value"
+        "action": "check_value",
+        "unique": false
     }, {
         "token": "line_end",
-        "regex": ";"
+        "regex": ";",
+        "unique": true
     }, {
         "token": "op_arit",
-        "regex": "\\+|\\-|\\*|\\/"
+        "regex": "\\+|\\-|\\*|\\/",
+        "unique": false
     }, {
         "token": "op_log",
-        "regex": "\\|\\||&&|!"
+        "regex": "\\|\\||&&|!",
+        "unique": false
     }, {
         "token": "op_comp",
-        "regex": "==|!=|<=|>=|>|<"
+        "regex": "==|!=|<=|>=|>|<",
+        "unique": false
     }, {
         "token": "asig",
-        "regex": "="
+        "regex": "=",
+        "unique": true
     }, {
         "token": "zhuli",
-        "regex": "-?[0-9]+"
-    }, {
-        "token": "koi",
-        "regex": "tui|la"
-    }, {
-        "token": "null",
-        "regex": "sokka"
+        "regex": "-?[0-9]+",
+        "unique": false
     }, {
         "token": "appa",
-        "regex": "-?[0-9]+\\.[0-9]+"
+        "regex": "-?[0-9]+\\.[0-9]+",
+        "unique": false
     }, {
         "token": "arg_start",
-        "regex": "\\("
+        "regex": "\\(",
+        "unique": true
     }, {
         "token": "arg_end",
-        "regex": "\\)"
+        "regex": "\\)",
+        "unique": true
     }, {
         "token": "program_start",
-        "regex": "{"
+        "regex": "{",
+        "unique": true
     }, {
         "token": "program_end",
-        "regex": "}"
+        "regex": "}",
+        "unique": true
     }, {
         "token": "scroll",
-        "regex": "\".*\""
+        "regex": "\".*\"",
+        "unique": false
     }, {
         "token": "wan",
-        "regex": "'.'"
+        "regex": "'.'",
+        "unique": false
     }, {
         "token": "incomplete_appa",
-        "regex": "-?[0-9]+\\."
+        "regex": "-?[0-9]+\\.",
+        "unique": false
     }, {
         "token": "incomplete_scroll",
-        "regex": "\"[^\"]*"
+        "regex": "\"[^\"]*",
+        "unique": false
     }, {
         "token": "scroll_delimiter",
-        "regex": "\""
+        "regex": "\"",
+        "unique": false
     }],
 
     "language_words": [{
         "token": "reserved",
-        "regex": "agni|kai|avatar|raava|cabbage|yipyip|energy|bend"
+        "regex": "agni|kai|avatar|raava|cabbage|yipyip|energy|bend",
+        "unique": false
     }, {
         "token": "type",
-        "regex": "zhuli|appa|koi|scroll|wan"
+        "regex": "zhuli|appa|koi|scroll|wan",
+        "unique": false
+    }, {
+        "token": "koi",
+        "regex": "tui|la",
+        "unique": false
+    }, {
+        "token": "null",
+        "regex": "sokka",
+        "unique": true
     }]
 }
