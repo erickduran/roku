@@ -6,13 +6,55 @@
     }, {
         "token": "line_end",
         "regex": ";"
+    }, {
+        "token": "op_arit",
+        "regex": "\\+|\\-|\\*|\\/"
+    }, {
+        "token": "op_log",
+        "regex": "\\|\\||&&|!"
+    }, {
+        "token": "op_comp",
+        "regex": "==|!=|<=|>=|>|<"
+    }, {
+        "token": "asig",
+        "regex": "="
+    }, {
+        "token": "zhuli",
+        "regex": "-?[0-9]+"
+    }, {
+        "token": "koi",
+        "regex": "tui|la"
+    }, {
+        "token": "null",
+        "regex": "sokka"
+    }, {
+        "token": "appa",
+        "regex": "-?[0-9]+\\.[0-9]+"
+    }, {
+        "token": "arg_start",
+        "regex": "\\("
+    }, {
+        "token": "arg_end",
+        "regex": "\\)"
+    }, {
+        "token": "program_start",
+        "regex": "{"
+    }, {
+        "token": "program_end",
+        "regex": "}"
+    }, {
+        "token": "scroll",
+        "regex": "\".*\""
+    }, {
+        "token": "wan",
+        "regex": "'.'"
         }],
 
     "language_words": [{
         "token": "reserved",
-        "pattern": "bend"
+        "pattern": "agni|kai|avatar|raava|cabbage|yipyip|energy|bend"
     }, {
         "token": "type",
-        "pattern": "appa"
+        "pattern": "zhuli|appa|koi|scroll|wan"
     }]
 }
