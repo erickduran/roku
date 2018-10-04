@@ -1,12 +1,15 @@
 # lexical_analyser.py
 """This is the lexical analyser for the roku programming language.
 
-- TODO
-
+The main objective of this class is to read the input source file 
+and produce the tuples of the lexical analysis. The symbol table 
+entries will be embedded in the tuples.
 """
 
 import json
 import re
+
+from lexical.lexical_errors import *
 
 
 class LexicalAnalyser:
@@ -15,6 +18,8 @@ class LexicalAnalyser:
         self.__categories = []
 
     def load_categories(self, path):
+        """Takes the path of the 
+        """
         file = open(path, 'r')
         self.__categories = json.load(file)
         pass
@@ -61,7 +66,8 @@ class LexicalAnalyser:
                             is_space = True
 
                     if not is_space:
-                        print('lex error in line %d: character not identified: \'%s\'' % (line_number, current_string))
+                        message = 'lex error in line %d: character not identified: \'%s\'' % (line_number, current_string)
+                        raise InvalidCharacterError(message)
 
                     current_string = ''
                     last_correct_string = ''
