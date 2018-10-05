@@ -10,7 +10,7 @@
         "is_unique": true
     }, {
         "token": "op_arit",
-        "regex": "\\+|\\-|\\*|\\/",
+        "regex": "\\+|\\-|\\*|\\/|%",
         "is_unique": false
     }, {
         "token": "op_not",
