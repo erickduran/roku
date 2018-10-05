@@ -18,23 +18,20 @@ class LexicalAnalyser:
         self.__categories = []
 
     def load_categories(self, path):
-        """Takes the path of the 
+        """Takes the path of the categories definition file and loads them
+        to a local dictionary.
+
         """
         file = open(path, 'r')
         self.__categories = json.load(file)
-        pass
 
-    def parse_input(self, source_code):
+    def parse_input(self, source_code_path):
         self.__tuples = []
-        file = open(source_code, 'r').read()
+        file = self.__file_generator(source_code_path)
 
         current_string = ''
         last_correct_string = ''
         last_correct_category = None
-
-        i = 0
-        line_number = 1
-        file_length = len(file)
 
         def add_to_tuples(category, string):
             if category['is_unique']:
@@ -51,17 +48,22 @@ class LexicalAnalyser:
             last_correct_string = ''
             last_correct_category = None
         
-        while i < file_length:
-            char = file[i]
-            current_string += char
+        char = next(file, None)
+
+        if char is None:
+            raise EmptyFileError('The input file is empty.')
+
+        while char is not None:
+            current_string += char[0]
 
             found_category = self.__check_symbol(current_string)
             if found_category is not None:
                 last_correct_string = current_string
                 last_correct_category = found_category
-                i += 1
+                char = next(file, None)
 
-                if i == file_length:
+                #eof
+                if char is None:
                     add_to_tuples(found_category, current_string)
             else:
                 if last_correct_category is not None:
@@ -73,18 +75,23 @@ class LexicalAnalyser:
 
                     if match_result is not None:
                         if match_result.start() == 0 and match_result.end() == len(current_string):
-                            if current_string == '\n':
-                                line_number += 1
                             is_space = True
 
                     if not is_space:
-                        message = 'lex error in line %d: character not identified: \'%s\'' % (line_number, current_string)
+                        message = 'lex error in line %d:%d: character not identified: \'%s\'' % (char[2], char[1], current_string)
                         raise InvalidCharacterError(message)
 
                     reset_all_current_values()
-                    i += 1
+                    char = next(file, None)
 
         return self.__tuples
+
+    def __file_generator(self, path):
+        file = open(path, 'r')
+
+        for line_num, line in enumerate(file):
+            for char_num, char in enumerate(line):
+                yield char, char_num+1, line_num+1
 
     def __add_tuple(self, token, value=None):
         if value:
