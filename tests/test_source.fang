@@ -1,10 +1,11 @@
-bend energy: zhuli () {
+bend energy() {
 	zhuli delta = 0;
 	appa alfa = 10.0;
 	scroll delta = "erick";
 	koi boolean = tui;
 
 	appa result = alfa + delta;
+	result = alfa % delta;
 	result = alfa - delta;
 
 	boolean = !la;
