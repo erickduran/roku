@@ -3,6 +3,12 @@ This repository stores the implementation of the compiler for the __roku__ progr
 
 ## Getting started
 
+### Version
+This repository stores v1.0 of the  __roku__ compiler.
+
+### Prerequisites
+This compiler was implemented using __Python 3__ (3.6.5) and it is designed for it. You will need to have this installed prior to usage.
+
 ### What everything means
 
 __Terminals__ | __Actual meaning__
