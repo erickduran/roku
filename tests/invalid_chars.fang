@@ -1,0 +1,27 @@
+bend energy: zhuli () {
+	zhuli delta = 0;
+	appa alfa = 10.0;
+	scroll delta = "erick";
+	koi boolean = tui;
+
+	~ ` @ # $ % \ ° ¨ ´ ,
+
+	appa result = alfa + delta;
+	result = alfa - delta;
+
+	boolean = !la;
+	boolean = boolean && boolean;
+	boolean = boolean || boolean;
+
+	zhuli ev = a < b;
+	zhuli ev2 = a == b;
+	zhuli ev3 = (a != c);
+
+	wan char = 'h';
+
+	yipyip sokka;
+}
+
+bend element: appa (scroll name, scroll lastname) {
+	yipyip 40.0;
+}
