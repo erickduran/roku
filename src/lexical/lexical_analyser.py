@@ -36,6 +36,21 @@ class LexicalAnalyser:
         line_number = 1
         file_length = len(file)
 
+        def add_to_tuples(category, string):
+            if category['is_unique']:
+                self.__add_tuple(token=category['token'])
+            else:
+                self.__add_tuple(token=category['token'], value=string)
+
+        def reset_all_current_values():
+            nonlocal current_string
+            nonlocal last_correct_string
+            nonlocal last_correct_category
+
+            current_string = ''
+            last_correct_string = ''
+            last_correct_category = None
+        
         while i < file_length:
             char = file[i]
             current_string += char
@@ -45,16 +60,13 @@ class LexicalAnalyser:
                 last_correct_string = current_string
                 last_correct_category = found_category
                 i += 1
+
+                if i == file_length:
+                    add_to_tuples(found_category, current_string)
             else:
                 if last_correct_category is not None:
-                    if last_correct_category['is_unique']:
-                        self.__add_tuple(token=last_correct_category['token'])
-                    else:
-                        self.__add_tuple(token=last_correct_category['token'], value=last_correct_string)
-
-                    current_string = ''
-                    last_correct_string = ''
-                    last_correct_category = None
+                    add_to_tuples(last_correct_category, last_correct_string)
+                    reset_all_current_values()
                 else:
                     is_space = False
                     match_result = re.match(self.__categories['spaces']['regex'], current_string)
@@ -69,9 +81,7 @@ class LexicalAnalyser:
                         message = 'lex error in line %d: character not identified: \'%s\'' % (line_number, current_string)
                         raise InvalidCharacterError(message)
 
-                    current_string = ''
-                    last_correct_string = ''
-                    last_correct_category = None
+                    reset_all_current_values()
                     i += 1
 
         return self.__tuples
@@ -81,7 +91,6 @@ class LexicalAnalyser:
             self.__tuples.append((token, value))
         else:
             self.__tuples.append(token)
-        pass
 
     def __check_symbol(self, symbol):
         for category in self.__categories['categories']:
