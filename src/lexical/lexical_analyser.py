@@ -8,14 +8,17 @@ entries will be embedded in the tuples.
 
 import json
 import re
+import collections
 
 from lexical.lexical_errors import *
 
 
 class LexicalAnalyser:
+
     def __init__(self):
         self.__tuples = []
         self.__categories = []
+        self.Char = collections.namedtuple('Char', ('value', 'char_num', 'line_num'))
 
     def load_categories(self, path):
         """Takes the path of the categories definition file and loads them
@@ -24,6 +27,7 @@ class LexicalAnalyser:
         """
         file = open(path, 'r')
         self.__categories = json.load(file)
+
 
     def parse_input(self, source_code_path):
         self.__tuples = []
@@ -78,7 +82,7 @@ class LexicalAnalyser:
                             is_space = True
 
                     if not is_space:
-                        message = 'lex error in line %d:%d: character not identified: \'%s\'' % (char[2], char[1], current_string)
+                        message = 'lex error in line %d:%d: character not identified: \'%s\'' % (char['line_num'], char['char_num'], current_string)
                         raise InvalidCharacterError(message)
 
                     reset_all_current_values()
@@ -91,7 +95,7 @@ class LexicalAnalyser:
 
         for line_num, line in enumerate(file):
             for char_num, char in enumerate(line):
-                yield char, char_num+1, line_num+1
+                yield self.Char(char, char_num+1, line_num+1)
 
     def __add_tuple(self, token, value=None):
         if value:
