@@ -3,11 +3,18 @@ This repository stores the implementation of the compiler for the __roku__ progr
 
 ## Getting started
 
+### What it is?
+A compiler for a simple "domestic" programming language inspired by _Avatar: The Last Airbender_.
+
+### What it isn't?
+* An official compiler.
+* A compiler for a day-to-day use programming language.
+
 ### Version
 This repository stores v1.0 of the  __roku__ compiler.
 
 ### Prerequisites
-This compiler was implemented using __Python 3__ (3.6.5) and it is designed for it. You will need to have this installed prior to usage.
+This compiler was implemented using __Python 3__ (3.7.0) and it is designed for it. You will need to have this installed prior to usage.
 
 ### What everything means
 
@@ -30,7 +37,7 @@ energy		| reserved word for the main block
 
 
 ## Authors
-Developed by _The Boomeraangs_. Copyright © 2018, Alfa Venegas, Daniel Ortega and Erick Durán.
+Developed by _The Boomeraangs_. Copyright © 2018, Alfa Venegas, Daniel Ortega and Erick Durán. CETYS Universidad.
 
 ## License
 Released under the GNU GENERAL PUBLIC LICENSE.
