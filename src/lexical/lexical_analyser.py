@@ -58,7 +58,7 @@ class LexicalAnalyser:
             raise EmptyFileError('The input file is empty.')
 
         while char is not None:
-            current_string += char[0]
+            current_string += char.value
 
             found_category = self.__check_symbol(current_string)
             if found_category is not None:
@@ -82,7 +82,7 @@ class LexicalAnalyser:
                             is_space = True
 
                     if not is_space:
-                        message = 'lex error in line %d:%d: character not identified: \'%s\'' % (char['line_num'], char['char_num'], current_string)
+                        message = 'lex error in line %d:%d: character not identified: \'%s\'' % (char.line_num, char.char_num, current_string)
                         raise InvalidCharacterError(message)
 
                     reset_all_current_values()
