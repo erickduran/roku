@@ -9,8 +9,7 @@ entries will be embedded in the tuples.
 import json
 import re
 import collections
-
-from lexical.lexical_errors import *
+import errors
 
 
 class LexicalAnalyser:

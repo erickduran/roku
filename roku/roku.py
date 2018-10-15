@@ -21,7 +21,7 @@ def main():
 	analyser = LexicalAnalyser()
 
 	print('Loading categories...')
-	analyser.load_categories('lexical/lexical_categories.json')
+	analyser.load_categories('resources/lexical_categories.json')
 
 	print('Generating tuples...')
 	tuples = analyser.parse_input(file)
