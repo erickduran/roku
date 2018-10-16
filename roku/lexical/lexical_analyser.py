@@ -9,7 +9,8 @@ entries will be embedded in the tuples.
 import json
 import re
 import collections
-import errors
+
+from errors import InvalidCharacterError
 
 
 class LexicalAnalyser:
@@ -22,7 +23,6 @@ class LexicalAnalyser:
     def load_categories(self, path):
         """Takes the path of the categories definition file and loads them
         to a local dictionary.
-
         """
         file = open(path, 'r')
         self.__categories = json.load(file)
@@ -65,7 +65,6 @@ class LexicalAnalyser:
                 last_correct_category = found_category
                 char = next(file, None)
 
-                #eof
                 if char is None:
                     add_to_tuples(found_category, current_string)
             else:

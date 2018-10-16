@@ -5,8 +5,13 @@
 
 """
 import sys
+import os
 
 from lexical.lexical_analyser import LexicalAnalyser
+
+dir = os.path.dirname(__file__)
+lexical_categories_path = os.path.join(dir, 'resources/lexical_categories.json')
+syntax_rules_path = os.path.join(dir, 'resources/syntax_rules.json')
 
 
 def main():
@@ -21,7 +26,7 @@ def main():
 	analyser = LexicalAnalyser()
 
 	print('Loading categories...')
-	analyser.load_categories('resources/lexical_categories.json')
+	analyser.load_categories(lexical_categories_path)
 
 	print('Generating tuples...')
 	tuples = analyser.parse_input(file)
