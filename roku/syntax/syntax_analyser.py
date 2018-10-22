@@ -34,6 +34,10 @@ class SyntaxAnalyser:
 		print('result: ' + str(result))
 		print('expected: ' + str(self.__length))
 
+		if tree is None:
+			message = f'syntax error on line {self.__last_correct_tuple[0][1]}:{self.__last_correct_tuple[0][0]}'
+			raise SyntaxError(message)
+
 		return tree
 
 	def load_rules(self, path):
@@ -67,8 +71,7 @@ class SyntaxAnalyser:
 			if node.children:
 				break
 
-		# if result_index is None:
-		# 	message = f'syntax error on line {self.__last_correct_tuple[0][1]}:{self.__last_correct_tuple[0][0]}'
-		# 	raise SyntaxError(message)
+		if not node.children:
+			node = None
 
 		return node, result_index
