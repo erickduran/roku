@@ -36,22 +36,28 @@ class LexicalAnalyser:
         current_string = ''
         last_correct_string = ''
         last_correct_category = None
+        first_char_of_tuple = None
 
-        def add_to_tuples(category, string):
+        def add_to_tuples(category, string, first_char_of_tuple):
             if category['is_unique']:
-                self.__add_tuple(token=category['token'])
-            else:
                 self.__add_tuple(token=category['token'], 
-                    value=string)
+                    location=(first_char_of_tuple.char_num, 
+                        first_char_of_tuple.line_num))
+            else:
+                self.__add_tuple(token=category['token'],  
+                    location=(first_char_of_tuple.char_num, 
+                        first_char_of_tuple.line_num), value=string)
 
         def reset_all_current_values():
             nonlocal current_string
             nonlocal last_correct_string
             nonlocal last_correct_category
+            nonlocal first_char_of_tuple
 
             current_string = ''
             last_correct_string = ''
             last_correct_category = None
+            first_char_of_tuple = None
         
         char = next(file, None)
 
@@ -61,6 +67,9 @@ class LexicalAnalyser:
         while char is not None:
             current_string += char.value
 
+            if first_char_of_tuple is None:
+                first_char_of_tuple = char
+
             found_category = self.__check_symbol(current_string)
             if found_category is not None:
                 last_correct_string = current_string
@@ -68,11 +77,12 @@ class LexicalAnalyser:
                 char = next(file, None)
 
                 if char is None:
-                    add_to_tuples(found_category, current_string)
+                    add_to_tuples(found_category, current_string,
+                        first_char_of_tuple)
             else:
                 if last_correct_category is not None:
                     add_to_tuples(last_correct_category, 
-                        last_correct_string)
+                        last_correct_string, first_char_of_tuple)
                     reset_all_current_values()
                 else:
                     is_space = False
@@ -85,7 +95,7 @@ class LexicalAnalyser:
                             is_space = True
 
                     if not is_space:
-                        message = 'lex error in line %d:%d: character not identified: \'%s\'' % (char.line_num, char.char_num, current_string)
+                        message = f'lex error in line {char.line_num}:{char.char_num}: character not identified: \'{current_string}\''
                         raise InvalidCharacterError(message)
 
                     reset_all_current_values()
@@ -100,11 +110,11 @@ class LexicalAnalyser:
             for char_num, char in enumerate(line):
                 yield self.Char(char, char_num+1, line_num+1)
 
-    def __add_tuple(self, token, value=None):
+    def __add_tuple(self, token, location, value=None):
         if value:
-            self.__tuples.append((token, value))
+            self.__tuples.append((location, token, value))
         else:
-            self.__tuples.append(token)
+            self.__tuples.append((location, token))
 
     def __check_symbol(self, symbol):
         for category in self.__categories['categories']:

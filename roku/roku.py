@@ -12,8 +12,10 @@ from lexical.lexical_analyser import LexicalAnalyser
 from syntax.syntax_analyser import SyntaxAnalyser
 
 dir = os.path.dirname(__file__)
-lexical_categories_path = os.path.join(dir, 'resources/lexical_categories.json')
-syntax_rules_path = os.path.join(dir, 'resources/syntax_rules.json')
+lexical_categories_path = os.path.join(dir, 
+	'resources/lexical_categories.json')
+syntax_rules_path = os.path.join(dir, 
+	'resources/syntax_rules.json')
 
 @click.command()
 @click.argument('source_file')
@@ -38,10 +40,13 @@ def main(source_file, output_file):
 	
 	# just for dev
 	for i, element in enumerate(tuples):
-		if isinstance(element, tuple):
-			print(str(i) + ' token: ' + element[0] + ' value: ' + element[1])
+		if len(element) == 3:
+			print(str(i) + ' token: ' + element[1] + ' value: ' 
+				+ element[2] + ' -> on line ' + str(element[0][1]) + 
+				':' + str(element[0][0]))
 		else:
-			print(str(i) + ' token: ' + element)
+			print(str(i) + ' token: ' + element[1] + ' -> on line ' +
+				str(element[0][1]) + ':' + str(element[0][0]))
 		
 	print('Generating syntax tree...')
 	syntax.start_analysis()

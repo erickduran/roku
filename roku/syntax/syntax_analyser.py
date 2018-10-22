@@ -1,3 +1,9 @@
+# syntax_analyser.py
+"""This is the syntax analyser for the roku programming language.
+
+The main objective of this class is to read the tuples from the
+lexical analyser and produce the abstract syntax tree (AST).
+"""
 import json
 
 class Node:
@@ -13,6 +19,7 @@ class SyntaxAnalyser:
 		self.__tuples = tuples
 		self.__length = len(tuples)
 		self.__rules = []
+		self.__last_correct_tuple = None
 		
 	def start_analysis(self):
 		result = self.check(':s', 0)
@@ -25,14 +32,11 @@ class SyntaxAnalyser:
 		
 	def check(self, rule, i):
 		if not rule.startswith(':'):
-			if isinstance(self.__tuples[i], tuple):
-				if self.__tuples[i][0] == rule:
-					return i + 1
+			if self.__tuples[i][1] == rule:
+				return i + 1
 			else:
-				if self.__tuples[i] == rule:
-					return i + 1
-
-			return None
+				self.__last_correct_tuple = self.__tuples[i]
+				return None
 
 		rule = self.__rules[rule]
 		result_index = None
@@ -45,7 +49,7 @@ class SyntaxAnalyser:
 					break
 
 		if result_index is None:
-			message = 'syntax error'
+			message = f'syntax error on line {self.__last_correct_tuple[0][1]}:{self.__last_correct_tuple[0][0]}'
 			raise SyntaxError(message)
 
 		return result_index
