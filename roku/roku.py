@@ -33,12 +33,38 @@ def main(source_file, output_file):
 	tuples = analyser.parse_input(file)
 
 	print('Creating syntax analyser...')
-	syntax = SyntaxAnalyser(tuples)
+	syntax = SyntaxAnalyser()
 
 	print('Loading syntax rules...')
 	syntax.load_rules(syntax_rules_path)
-	
-	# just for dev
+		
+	print('Generating syntax tree...')
+	tree = syntax.create_tree(tuples)
+
+	# print_tuples(tuples)
+	print_node(tree, 0)
+
+def print_node(node, level):
+	string = ''
+	for i in range(0, level):
+		if i == level-1:
+			string += '╚══ '
+		else:
+			string += '    '
+		
+
+	if isinstance(node.core, tuple):
+		string += node.core[1]
+	else:
+		string += node.core
+
+	print(string)
+
+	for child in node.children:
+		print_node(child, level+1)
+
+# just for dev
+def print_tuples(tuples):
 	for i, element in enumerate(tuples):
 		if len(element) == 3:
 			print(str(i) + ' token: ' + element[1] + ' value: ' 
@@ -47,9 +73,6 @@ def main(source_file, output_file):
 		else:
 			print(str(i) + ' token: ' + element[1] + ' -> on line ' +
 				str(element[0][1]) + ':' + str(element[0][0]))
-		
-	print('Generating syntax tree...')
-	syntax.start_analysis()
 
 if __name__ == '__main__':
 	main()

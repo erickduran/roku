@@ -1,9 +1,16 @@
 {
 	":s": {
 		"rule_options": [
-			["bend", "energy", "arg_start", "arg_end", "colon", "type", "block_start", ":instruction", "block_end"]
+			["bend", "energy", "arg_start", "arg_end", "colon", "type", "block_start", ":program", "block_end"]
 		]
 	}, 
+
+	":program": {
+		"rule_options": [
+			[":instruction", ":program"],
+			[":instruction"]
+		]
+	},
 
 	":instruction": {
 		"rule_options": [
@@ -13,7 +20,8 @@
 
 	":declaration": {
 		"rule_options": [
-			["type", ":assignment"]
+			["type", ":assignment"],
+			["type", "identifier"]
 		]
 	}, 
 

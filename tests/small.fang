@@ -1,3 +1,4 @@
 bend energy(): zhuli {
 	zhuli delta = 0;
+	scroll hola;
 }
