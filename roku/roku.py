@@ -9,6 +9,7 @@ import os
 import click
 
 from lexical.lexical_analyser import LexicalAnalyser
+from syntax.syntax_analyser import SyntaxAnalyser
 
 dir = os.path.dirname(__file__)
 lexical_categories_path = os.path.join(dir, 'resources/lexical_categories.json')
@@ -20,7 +21,7 @@ syntax_rules_path = os.path.join(dir, 'resources/syntax_rules.json')
 def main(source_file, output_file):
 	file = source_file
 
-	print('Creating analyser...')
+	print('Creating lexical analyser...')
 	analyser = LexicalAnalyser()
 
 	print('Loading categories...')
@@ -29,6 +30,12 @@ def main(source_file, output_file):
 	print('Generating tuples...')
 	tuples = analyser.parse_input(file)
 
+	print('Creating syntax analyser...')
+	syntax = SyntaxAnalyser(tuples)
+
+	print('Loading syntax rules...')
+	syntax.load_rules(syntax_rules_path)
+	
 	# just for dev
 	for i, element in enumerate(tuples):
 		if isinstance(element, tuple):
@@ -36,6 +43,8 @@ def main(source_file, output_file):
 		else:
 			print(str(i) + ' token: ' + element)
 		
+	print('Generating syntax tree...')
+	syntax.start_analysis()
 
 if __name__ == '__main__':
 	main()

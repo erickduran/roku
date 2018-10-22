@@ -18,11 +18,12 @@ class LexicalAnalyser:
     def __init__(self):
         self.__tuples = []
         self.__categories = []
-        self.Char = collections.namedtuple('Char', ('value', 'char_num', 'line_num'))
+        self.Char = collections.namedtuple('Char', ('value', 
+            'char_num', 'line_num'))
 
     def load_categories(self, path):
-        """Takes the path of the categories definition file and loads them
-        to a local dictionary.
+        """Takes the path of the categories definition file and loads 
+        them to a local dictionary.
         """
         file = open(path, 'r')
         self.__categories = json.load(file)
@@ -40,7 +41,8 @@ class LexicalAnalyser:
             if category['is_unique']:
                 self.__add_tuple(token=category['token'])
             else:
-                self.__add_tuple(token=category['token'], value=string)
+                self.__add_tuple(token=category['token'], 
+                    value=string)
 
         def reset_all_current_values():
             nonlocal current_string
@@ -69,11 +71,14 @@ class LexicalAnalyser:
                     add_to_tuples(found_category, current_string)
             else:
                 if last_correct_category is not None:
-                    add_to_tuples(last_correct_category, last_correct_string)
+                    add_to_tuples(last_correct_category, 
+                        last_correct_string)
                     reset_all_current_values()
                 else:
                     is_space = False
-                    match_result = re.match(self.__categories['spaces']['regex'], current_string)
+                    match_result = re.match(
+                        self.__categories['spaces']['regex'], 
+                        current_string)
 
                     if match_result is not None:
                         if match_result.start() == 0 and match_result.end() == len(current_string):
@@ -119,9 +124,10 @@ class LexicalAnalyser:
         return None
 
     def __check_in_words(self, symbol):
-        for word in self.__categories['language_words']:
+        for word in self.__categories['reserved']:
             match_result = re.match(word['regex'], symbol)
             if match_result is not None:
                 if match_result.start() == 0 and match_result.end() == len(symbol):
                     return word
         return None
+        

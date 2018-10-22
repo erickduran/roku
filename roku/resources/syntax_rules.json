@@ -1,6 +1,32 @@
 {
-	"rules": [{
-		"rule_name": "",
-		"rule_options": []
-	}]
+	":s": {
+		"rule_options": [
+			["bend", "energy", "arg_start", "arg_end", "colon", "type", "block_start", ":instruction", "block_end"]
+		]
+	}, 
+
+	":instruction": {
+		"rule_options": [
+			[":declaration", "line_end"]
+		]
+	}, 
+
+	":declaration": {
+		"rule_options": [
+			["type", ":assignment"]
+		]
+	}, 
+
+	":assignment": {
+		"rule_options": [
+			["identifier", "asig", ":value"]
+		]
+	}, 
+
+	":value": {
+		"rule_options": [
+			["koi"],
+			["zhuli"]
+		]
+	}
 }
