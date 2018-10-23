@@ -8,8 +8,8 @@ import sys
 import os
 import click
 
-from lexical.lexical_analyser import LexicalAnalyser
-from syntax.syntax_analyser import SyntaxAnalyser
+from compiler.lexical_analyser import LexicalAnalyser
+from compiler.syntax_analyser import SyntaxAnalyser
 
 dir = os.path.dirname(__file__)
 lexical_categories_path = os.path.join(dir, 
@@ -52,7 +52,6 @@ def print_node(node, level):
 		else:
 			string += '    '
 		
-
 	if isinstance(node.core, tuple):
 		string += node.core[1]
 	else:
