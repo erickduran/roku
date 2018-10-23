@@ -41,8 +41,12 @@ def main(source_file, output_file):
 	print('Generating syntax tree...')
 	tree = syntax.create_tree(tuples)
 
-	# print_tuples(tuples)
+	print_tuples(tuples)
 	print_node(tree, 0)
+
+	print(f'result: {str(tree.length())}')
+	print(f'expected: {str(len(tuples))}')
+
 
 def print_node(node, level):
 	string = ''
@@ -62,7 +66,7 @@ def print_node(node, level):
 	for child in node.children:
 		print_node(child, level+1)
 
-# just for dev
+
 def print_tuples(tuples):
 	for i, element in enumerate(tuples):
 		if len(element) == 3:
@@ -72,6 +76,7 @@ def print_tuples(tuples):
 		else:
 			print(str(i) + ' token: ' + element[1] + ' -> on line ' +
 				str(element[0][1]) + ':' + str(element[0][0]))
+
 
 if __name__ == '__main__':
 	main()
