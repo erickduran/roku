@@ -17,6 +17,21 @@ class Node:
 	def remove_children(self):
 		self.children = []
 
+	def length(self):
+		total = 0
+		if not self.children:
+			total = 1
+		else:
+			for child in self.children:
+				total += child.length()
+		return total
+
+	def copy(self):
+		node = Node(self.core)
+		node.children = self.children
+		return node
+
+
 class SyntaxAnalyser:
 	def __init__(self):
 		self.__tuples = []
@@ -55,6 +70,11 @@ class SyntaxAnalyser:
 		node = Node(rule)
 		rule = self.__rules[rule]
 		result_index = None
+
+		max_node = None
+		max_index = None
+
+
 		for option in rule['rule_options']:
 			result_index = i
 			for rule in option:
@@ -66,12 +86,13 @@ class SyntaxAnalyser:
 
 				node.append(child)
 
-			# prone to error if incomplete rule
-			# remember to check first longest rules
 			if node.children:
-				break
+				if max_node is None or node.length() > max_node.length():
+					max_node = node.copy()
+					max_index = result_index
+				node.remove_children()
 
-		if not node.children:
-			node = None
+		node = max_node
+		result_index = max_index
 
 		return node, result_index
