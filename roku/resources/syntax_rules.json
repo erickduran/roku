@@ -14,7 +14,13 @@
 
 	":instruction": {
 		"rule_options": [
-			[":declaration", "line_end"]
+			["yipyip", ":value", "line_end"],
+			[":declaration", "line_end"],
+			[":assignment", "line_end"],
+			[":call", "line_end"],
+			["cabbage", "line_end"],
+			[":loop"],
+			[":flow"]
 		]
 	}, 
 
@@ -33,8 +39,155 @@
 
 	":value": {
 		"rule_options": [
+			["zhuli"],
+			[":operation"],
+			[":logical_value"],
+			["identifier"],
+			["sokka"],
+			[":call"],
+			["scroll"],
+			["wan"]
+		]
+	}, 
+
+	":loop": {
+		"rule_options": [
+			[":avatar"],
+			[":raava"]
+		]
+	}, 
+
+	":avatar": {
+		"rule_options": [
+			["avatar", "arg_start", ":declaration", "line_end", ":logical", "line_end", ":assignment", "arg_end", "block_start", ":program", "block_end"],
+			["avatar", "arg_start", ":assignment", "line_end", ":logical", "line_end", ":assignment", "arg_end", "block_start", ":program", "block_end"]
+		]
+	},
+
+	":raava": {
+		"rule_options": [
+			["raava", "arg_start", ":logical", "arg_end", "block_start", ":program", "block_end"]
+		]
+	},
+
+	":flow": {
+		"rule_options": [
+			[":agni", ":agnikais", ":kai"],
+			[":agni", ":agnikais"],
+			[":agni", ":kai"],
+			[":agni"]
+		]
+	},
+
+	":agnikais": {
+		"rule_options": [
+			[":agnikai"],
+			[":agnikais"]
+		]
+	},
+
+	":agni": {
+		"rule_options": [
+			["agni", "arg_start", ":logical", "arg_end", "block_start", ":program", "block_end"],
+			["agni", "arg_start", ":logical", "arg_end", "block_start", "block_end"]
+		]
+	},
+
+	":agnikai": {
+		"rule_options": [
+			["agnikai", "arg_start", ":logical", "arg_end", "block_start", ":program", "block_end"],
+			["agnikai", "arg_start", ":logical", "arg_end", "block_start", "block_end"]
+		]
+	},
+
+	":kai": {
+		"rule_options": [
+			["kai", "block_start", ":program", "block_end"],
+			["kai", "block_start", "block_end"]
+		]
+	},
+
+	":call": {
+		"rule_options": [
+			["identifier", "arg_start", ":args_call", "arg_end"]
+		]
+	},
+
+	":args": {
+		"rule_options": [
+			["type", "identifier", ":argses"],
+			["type", "identifier"]
+		]
+	},
+
+	":argses": {
+		"rule_options": [
+			["comma", "type", "identifier", ":argses"],
+			["comma", "type", "identifier"]
+		]
+	},
+
+	":args_call": {
+		"rule_options": [
+			[":value", ":args_calls"],
+			[":value"]
+		]
+	},
+
+	":args_calls": {
+		"rule_options": [
+			["comma", ":value", ":args_calls"],
+			["comma", ":value"]
+		]
+	},
+
+	":negation": {
+		"rule_options": [
+			["op_not", ":logical"]
+		]
+	},
+
+	":comparison": {
+		"rule_options": [
+			[":value", "op_comp", ":value"]
+		]
+	},
+
+	":logical": {
+		"rule_options": [
+			[":logical_value", "logicals"],
+			[":logical_value"]
+		]
+	},
+
+	":logicals": {
+		"rule_options": [
+			["op_log", ":logical", ":logicals"],
+			["op_log", ":logical"]
+		]
+	},
+
+	":logical_value": {
+		"rule_options": [
+			[":comparison"],
+			[":negation"],
 			["koi"],
-			["zhuli"]
+			["identifier"]
+		]
+	},
+
+	":operation": {
+		"rule_options": [
+			[":value", "op_arit", ":value", ":operations"],
+			[":value", "op_arit", ":value"]
+		]
+	},
+
+	":operations": {
+		"rule_options": [
+			["op_arit", ":value", ":operations"],
+			["op_arit", ":value"]
 		]
 	}
+
 }
