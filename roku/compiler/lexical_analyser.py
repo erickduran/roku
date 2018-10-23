@@ -21,6 +21,7 @@ class LexicalAnalyser:
         self.Char = collections.namedtuple('Char', ('value', 
             'char_num', 'line_num'))
 
+
     def load_categories(self, path):
         """Takes the path of the categories definition file and loads 
         them to a local dictionary.
@@ -103,6 +104,7 @@ class LexicalAnalyser:
 
         return self.__tuples
 
+
     def __file_generator(self, path):
         file = open(path, 'r')
 
@@ -110,11 +112,13 @@ class LexicalAnalyser:
             for char_num, char in enumerate(line):
                 yield self.Char(char, char_num+1, line_num+1)
 
+
     def __add_tuple(self, token, location, value=None):
         if value:
             self.__tuples.append((location, token, value))
         else:
             self.__tuples.append((location, token))
+
 
     def __check_symbol(self, symbol):
         for category in self.__categories['categories']:
@@ -132,6 +136,7 @@ class LexicalAnalyser:
                     else:
                         return category
         return None
+
 
     def __check_in_words(self, symbol):
         for word in self.__categories['reserved']:
