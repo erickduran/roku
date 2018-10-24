@@ -6,7 +6,8 @@ bend energy(): zhuli {
 
 	avatar (i = 1; i <= 2*rows; i = i + 2){
 		avatar (j = 1; j <= i; j = j + 1){
-			print("a" + ('A'+count));
+			zhuli x = 'A'+count;
+			print("a" + x);
 			agni ( j <= i/2){
 				count = count + 1;
 			} 

@@ -90,6 +90,10 @@
         "token": "agni",
         "regex": "agni",
         "is_unique": true
+    },{
+        "token": "agnikai",
+        "regex": "agnikai",
+        "is_unique": true
     }, {
         "token": "kai",
         "regex": "kai",

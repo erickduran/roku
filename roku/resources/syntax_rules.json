@@ -37,18 +37,12 @@
 		]
 	}, 
 
-	":value": {
+	":number": {
 		"rule_options": [
 			["zhuli"],
-			[":operation"],
-			[":logical_value"],
-			["identifier"],
-			["sokka"],
-			[":call"],
-			["scroll"],
-			["wan"]
+			["appa"]
 		]
-	}, 
+	},
 
 	":loop": {
 		"rule_options": [
@@ -82,7 +76,7 @@
 	":agnikais": {
 		"rule_options": [
 			[":agnikai"],
-			[":agnikais"]
+			[":agnikai", ":agnikais"]
 		]
 	},
 
@@ -141,6 +135,19 @@
 		]
 	},
 
+	":value": {
+		"rule_options": [
+			[":number"],
+			[":operation"],
+			["identifier"],
+			[":logical"],
+			["sokka"],
+			[":call"],
+			["scroll"],
+			["wan"]
+		]
+	}, 
+
 	":negation": {
 		"rule_options": [
 			["op_not", ":logical"]
@@ -149,21 +156,21 @@
 
 	":comparison": {
 		"rule_options": [
-			[":value", "op_comp", ":value"]
+			[":comparing", "op_comp", ":comparing"]
 		]
 	},
 
 	":logical": {
 		"rule_options": [
-			[":logical_value", "logicals"],
+			[":logical_operation"],
 			[":logical_value"]
 		]
 	},
 
-	":logicals": {
+	":logical_operation": {
 		"rule_options": [
-			["op_log", ":logical", ":logicals"],
-			["op_log", ":logical"]
+			[":logical_value", "op_log", ":logical_value"],
+			[":logical_value", "op_log", ":logical_operation"]
 		]
 	},
 
@@ -172,22 +179,46 @@
 			[":comparison"],
 			[":negation"],
 			["koi"],
-			["identifier"]
+			["identifier"],
+			[":call"]
 		]
 	},
 
 	":operation": {
 		"rule_options": [
-			[":value", "op_arit", ":value", ":operations"],
-			[":value", "op_arit", ":value"]
+			[":operating", "op_arit", ":operating", ":operations"],
+			[":operating", "op_arit", ":operating"]
 		]
 	},
 
 	":operations": {
 		"rule_options": [
-			["op_arit", ":value", ":operations"],
-			["op_arit", ":value"]
+			["op_arit", ":operating", ":operations"],
+			["op_arit", ":operating"]
+		]
+	},
+
+	":operating": {
+		"rule_options": [
+			[":number"],
+			["identifier"],
+			[":call"],
+			["scroll"],
+			["wan"]
+		]
+	},
+
+	":comparing": {
+		"rule_options": [
+			[":number"],
+			["identifier"],
+			[":call"],
+			["scroll"],
+			["wan"],
+			[":operation"],
+			["sokka"]
 		]
 	}
+
 
 }
