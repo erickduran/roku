@@ -1,4 +1,4 @@
-bend energy() {
+bend energy(): zhuli {
 	zhuli delta = 0;
 	appa alfa = 10.0;
 	scroll delta = "erick";
@@ -14,7 +14,7 @@ bend energy() {
 
 	zhuli ev = a < b;
 	zhuli ev2 = a == b;
-	zhuli ev3 = (a != c);
+	zhuli ev3 = a != c;
 
 	wan char = 'h';
 

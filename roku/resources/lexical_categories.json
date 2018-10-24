@@ -131,7 +131,7 @@
         "regex": "tui|la",
         "is_unique": false
     }, {
-        "token": "null",
+        "token": "sokka",
         "regex": "sokka",
         "is_unique": true
     }],
