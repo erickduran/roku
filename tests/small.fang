@@ -1,0 +1,9 @@
+bend energy(): zhuli {
+	zhuli delta = 0;
+	scroll hola;
+	print("\n");
+
+	yipyip 1+1;
+	cabbage;
+	koi erick = !4<3;
+}

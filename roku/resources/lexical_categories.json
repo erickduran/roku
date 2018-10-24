@@ -86,10 +86,42 @@
         "is_unique": true
     }],
 
-    "language_words": [{
-        "token": "reserved",
-        "regex": "agni|kai|avatar|raava|cabbage|yipyip|energy|bend",
-        "is_unique": false
+    "reserved": [{
+        "token": "agni",
+        "regex": "agni",
+        "is_unique": true
+    },{
+        "token": "agnikai",
+        "regex": "agnikai",
+        "is_unique": true
+    }, {
+        "token": "kai",
+        "regex": "kai",
+        "is_unique": true
+    }, {
+        "token": "avatar",
+        "regex": "avatar",
+        "is_unique": true
+    }, {
+        "token": "raava",
+        "regex": "raava",
+        "is_unique": true
+    }, {
+        "token": "cabbage",
+        "regex": "cabbage",
+        "is_unique": true
+    }, {
+        "token": "yipyip",
+        "regex": "yipyip",
+        "is_unique": true
+    }, {
+        "token": "energy",
+        "regex": "energy",
+        "is_unique": true
+    }, {
+        "token": "bend",
+        "regex": "bend",
+        "is_unique": true
     }, {
         "token": "type",
         "regex": "zhuli|appa|koi|scroll|wan",
@@ -99,7 +131,7 @@
         "regex": "tui|la",
         "is_unique": false
     }, {
-        "token": "null",
+        "token": "sokka",
         "regex": "sokka",
         "is_unique": true
     }],

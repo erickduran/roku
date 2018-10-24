@@ -3,12 +3,15 @@ This repository stores the implementation of the compiler for the __roku__ progr
 
 ## Getting started
 
-### What it is?
+### What is it?
 A compiler for a simple "domestic" programming language inspired by _Avatar: The Last Airbender_.
 
 ### What it isn't?
 * An official compiler.
 * A compiler for a day-to-day use programming language.
+
+### Status
+The current status of this project is __IN PROGRESS__.
 
 ### Version
 This repository stores v1.0 of the  __roku__ compiler.
