@@ -90,6 +90,10 @@
         "token": "agni",
         "regex": "agni",
         "is_unique": true
+    },{
+        "token": "agnikai",
+        "regex": "agnikai",
+        "is_unique": true
     }, {
         "token": "kai",
         "regex": "kai",
@@ -127,7 +131,7 @@
         "regex": "tui|la",
         "is_unique": false
     }, {
-        "token": "null",
+        "token": "sokka",
         "regex": "sokka",
         "is_unique": true
     }],

@@ -21,7 +21,7 @@ class SyntaxAnalyser:
 
 		tree, result = self.__check(':s', 0)
 
-		if tree is None:
+		if tree is None or tree.length() != len(tuples):
 			message = f'syntax error on line {self.__last_correct_tuple[0][1]}:{self.__last_correct_tuple[0][0]}'
 			raise SyntaxError(message)
 
