@@ -1,14 +1,31 @@
 {
 	":s": {
 		"rule_options": [
-			["bend", "energy", "arg_start", "arg_end", "colon", "type", "block_start", ":program", "block_end"]
+			[":functions", "bend", "energy", "arg_start", "arg_end", "colon", "zhuli", "block_start", ":program", "block_end"],
+			["bend", "energy", "arg_start", "arg_end", "colon", "zhuli", "block_start", ":program", "block_end"]
 		]
 	}, 
+
+	":functions":{
+		"rule_options": [
+			[":function", ":functions"],
+			[":function"]
+		]
+	},
 
 	":program": {
 		"rule_options": [
 			[":instruction", ":program"],
 			[":instruction"]
+		]
+	},
+
+	":function": {
+		"rule_options": [
+			["bend", "identifier", "colon", "type", "arg_start", "args", "arg_end", "block_start", ":program", "block_end"],
+			["bend", "identifier", "arg_start", "args", "arg_end", "block_start", ":program", "block_end"],
+			["bend", "identifier", "colon", "type", "arg_start", "arg_end", "block_start", ":program", "block_end"],
+			["bend", "identifier", "arg_start", "arg_end", "block_start", ":program", "block_end"]
 		]
 	},
 
