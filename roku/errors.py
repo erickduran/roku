@@ -34,3 +34,23 @@ class SyntaxError(Error):
 
     def __init__(self, message):
         self.message = message
+
+class TypeError(Error):
+    """Exception raised when trying to parse a tuple type.
+
+    Attributes:
+    message -- explanation of the error
+    """
+
+    def __init__(self, message):
+        self.message = message
+
+class SemanticError(Error):
+    """Exception raised when finding a general semantic error.
+
+    Attributes:
+    message -- explanation of the error
+    """
+
+    def __init__(self, message):
+        self.message = message

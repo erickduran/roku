@@ -1,14 +1,14 @@
 bend energy(): zhuli {
 	zhuli i;
 	zhuli j;
-	zhuli rows = 5;
+	zhuli rows= 5;
 	zhuli count = 0;
 
 	avatar (i = 1; i <= 2*rows; i = i + 2){
-		avatar (j = 1; j <= i; j = j + 1){
+		avatar (j = 1; j < i; j = j + 1){
 			zhuli x = 'A'+count;
 			print("a" + x);
-			agni ( j <= i/2){
+			agni ( j <	 i/2){
 				count = count + 1;
 			} 
 			kai {

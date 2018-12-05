@@ -10,12 +10,15 @@ import click
 
 from compiler.lexical_analyser import LexicalAnalyser
 from compiler.syntax_analyser import SyntaxAnalyser
+from compiler.semantic_analyser import SemanticAnalyser
 
 dir = os.path.dirname(__file__)
 lexical_categories_path = os.path.join(dir, 
 	'resources/lexical_categories.json')
 syntax_rules_path = os.path.join(dir, 
 	'resources/syntax_rules.json')
+semantic_rules_path = os.path.join(dir, 
+	'resources/semantic_rules.json')
 
 @click.command()
 @click.argument('source_file')
@@ -53,6 +56,12 @@ def main(source_file, output_file, verbose, tuples, ast):
 	if tuples:
 		print_tuples(parsed_tuples)
 
+	
+
+	semantic = SemanticAnalyser()
+	semantic.load_rules(semantic_rules_path)
+	semantic.check_type(tree)
+
 	if ast:
 		print_node(tree, 0)
 
@@ -67,11 +76,17 @@ def print_node(node, level):
 			string += '╚══ '
 		else:
 			string += '    '
-		
+
 	if isinstance(node.core, tuple):
 		string += node.core[1]
 	else:
 		string += node.core
+
+	if node.type is not None:
+		string += ' (' + node.type + ')'
+
+	if node.rule is not None:
+		string += ' [by rule option: ' + str(node.rule) + ']'
 
 	print(string)
 

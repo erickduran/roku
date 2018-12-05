@@ -7,6 +7,7 @@ lexical analyser and produce the abstract syntax tree (AST).
 import json
 
 from entities import Node
+from errors import SyntaxError
 
 class SyntaxAnalyser:
 
@@ -48,7 +49,8 @@ class SyntaxAnalyser:
 		max_node = None
 		max_index = None
 
-		for option in rule['rule_options']:
+		for option_number, option in enumerate(rule['rule_options']):
+			node.rule = option_number
 			result_index = i
 			for rule in option:
 				child, result_index = self.__check(rule, result_index)

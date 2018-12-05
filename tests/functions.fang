@@ -1,0 +1,7 @@
+bend test(): scroll {
+	yipyip sokka;
+}
+
+bend energy(): zhuli {
+	yipyip 0;
+}
