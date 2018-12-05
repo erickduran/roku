@@ -43,7 +43,6 @@ class SemanticAnalyser:
 						raise SemanticError(f'Variable \'{identifier}\' already declared.')
 
 					self.__identifier_table[identifier] = parent.children[rule[0]].core[2]
-
 					if parent.rule == 0:
 						self.check_type(parent.children[rule[1]])
 
@@ -53,17 +52,17 @@ class SemanticAnalyser:
 					else:
 						parent.children[1].type = self.check_type(parent.children[1])
 				elif core == ':assignment':
-					identifier_type = self.check_type(parent.children[0])
+					identifier_raw_type = self.check_type(parent.children[0])
 					value_type = self.check_type(parent.children[2])
 
 					identifier = parent.children[0].core[2]
-					identifier_raw_type = self.__identifier_table[identifier]
+					identifier_type = self.__identifier_table[identifier]
 					
-					parent.type = identifier_raw_type
-					if value_type in self.__rules['compatibilities'][identifier_raw_type]:
-						parent.type = identifier_raw_type
+					parent.type = identifier_type
+					if value_type in self.__rules['compatibilities'][identifier_type]:
+						parent.type = value_type
 					else:
-						raise TypeError(f'\'{identifier_raw_type}\' not compatible with \'{value_type}\' on line {parent.children[0].core[0][1]}.')
+						raise TypeError(f'\'{identifier_type}\' not compatible with \'{value_type}\' on line {parent.children[0].core[0][1]}.')
 				elif core == ':operation':
 					types = []
 					operator = parent.children[1].core[2]
@@ -150,12 +149,35 @@ class SemanticAnalyser:
 
 					else:
 						parent.type = initial_type
-				
+				elif core == ':logical_operation':
+					parent.type = 'BOOLEAN'
+				elif core == ':logical_value':
+					value_type = self.check_type(parent.children[rule[0]])
+					if value_type != 'BOOLEAN':
+						raise TypeError(f'\'{value_type}\' not compatible with \'{operator}\' operator.')
+					parent.type = value_type
+				elif core == ':comparison':
+					types = []
+					operator = parent.children[1].core[2]
+
+					for element in rule:
+						node = parent.children[element]
+						types.append(self.check_type(node))
+
+					numeric_operators = ['<=', '>=', '>', '<']
+					if operator in numeric_operators:
+						for element in types:
+							if element not in ['INT', 'FLOAT']:
+								raise TypeError(f'\'{element}\' not compatible with \'{operator}\' operator.')
+								
+					parent.type = 'BOOLEAN'
 
 				if len(rule) == 1:
-					parent.type = self.check_type(parent.children[rule[0]])
+					if not parent.type:
+						parent.type = self.check_type(parent.children[rule[0]])
 				
-				self.check_children(parent)
+				if len(parent.children) > 1:
+					self.check_children(parent)
 				return parent.type
 		elif core == 'identifier':
 			identifier = parent.core[2]

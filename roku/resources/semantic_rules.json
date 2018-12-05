@@ -69,10 +69,46 @@
 				[0, 2]
 			]
 		},
+		":comparison": {
+			"final": false,
+			"options": [
+				[0, 2]
+			]
+		},
 		":operations": {
 			"final": false,
 			"options": [
 				[1, 2],
+				[1]
+			]
+		},
+		":logical": {
+			"final": false,
+			"options": [
+				[0],
+				[0]
+			]
+		},
+		":logical_value": {
+			"final": false,
+			"options": [
+				[0],
+				[0],
+				[0],
+				[0],
+				[0]
+			]
+		},
+		":logical_operation": {
+			"final": false,
+			"options": [
+				[0, 2],
+				[0, 2]
+			]
+		},
+		":negation": {
+			"final": false,
+			"options": [
 				[1]
 			]
 		},
