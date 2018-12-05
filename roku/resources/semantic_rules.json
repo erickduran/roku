@@ -33,11 +33,47 @@
 				[0]
 			]	
 		},
+		":operating": {
+			"final": false,
+			"options": [
+				[0],
+				[0],
+				[0],
+				[0],
+				[0]
+			]	
+		},
+		":comparing": {
+			"final": false,
+			"options": [
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[0]
+			]	
+		},
 		":number": {
 			"final": false,
 			"options": [
 				[0],
 				[0]
+			]
+		},
+		":operation": {
+			"final": false,
+			"options": [
+				[0, 2, 3],
+				[0, 2]
+			]
+		},
+		":operations": {
+			"final": false,
+			"options": [
+				[1, 2],
+				[1]
 			]
 		},
 		"zhuli": {

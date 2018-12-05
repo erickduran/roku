@@ -1,11 +1,14 @@
 bend energy(): zhuli {
 	zhuli delta = 0;
 	scroll hola;
-	wan x = 's';
+	wan x = 's' + 's';
 
 	yipyip sokka;
 	cabbage;
 	koi erick;
 	delta = 10;
+	hola = "hola" + "erick";
+	appa y = 1;
+	y = y + 4 + 1;
 }
 
