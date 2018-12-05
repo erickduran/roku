@@ -150,6 +150,7 @@ class SemanticAnalyser:
 
 					else:
 						parent.type = initial_type
+				
 
 				if len(rule) == 1:
 					parent.type = self.check_type(parent.children[rule[0]])
