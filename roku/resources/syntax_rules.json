@@ -22,8 +22,8 @@
 
 	":function": {
 		"rule_options": [
-			["bend", "identifier", "arg_start", "args", "arg_end", "colon", "type", "block_start", ":program", "block_end"],
-			["bend", "identifier", "arg_start", "args", "arg_end", "block_start", ":program", "block_end"],
+			["bend", "identifier", "arg_start", ":args", "arg_end", "colon", "type", "block_start", ":program", "block_end"],
+			["bend", "identifier", "arg_start", ":args", "arg_end", "block_start", ":program", "block_end"],
 			["bend", "identifier", "arg_start", "arg_end", "colon", "type", "block_start", ":program", "block_end"],
 			["bend", "identifier", "arg_start", "arg_end", "block_start", ":program", "block_end"]
 		]
@@ -126,15 +126,15 @@
 
 	":args": {
 		"rule_options": [
-			["type", "identifier", ":argses"],
-			["type", "identifier"]
+			[":declaration", ":argses"],
+			[":declaration"]
 		]
 	},
 
 	":argses": {
 		"rule_options": [
-			["comma", "type", "identifier", ":argses"],
-			["comma", "type", "identifier"]
+			["comma", ":declaration", ":argses"],
+			["comma", ":declaration"]
 		]
 	},
 

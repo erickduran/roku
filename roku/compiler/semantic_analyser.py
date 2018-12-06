@@ -40,7 +40,8 @@ class SemanticAnalyser:
 						identifier = parent.children[1].core[2]
 
 					if identifier in self.__identifier_table.keys():
-						raise SemanticError(f'Variable \'{identifier}\' already declared.')
+						if not isinstance(self.__identifier_table[identifier], dict):
+							raise SemanticError(f'Variable \'{identifier}\' already declared.')
 
 					self.__identifier_table[identifier] = parent.children[rule[0]].core[2]
 					if parent.rule == 0:
@@ -155,7 +156,7 @@ class SemanticAnalyser:
 					value_type = self.check_type(parent.children[rule[0]])
 					if value_type != 'BOOLEAN':
 						raise TypeError(f'\'{value_type}\' not compatible with \'{operator}\' operator.')
-					parent.type = value_type
+					parent.type = value_type		
 				elif core == ':comparison':
 					types = []
 					operator = parent.children[1].core[2]
@@ -171,10 +172,38 @@ class SemanticAnalyser:
 								raise TypeError(f'\'{element}\' not compatible with \'{operator}\' operator.')
 								
 					parent.type = 'BOOLEAN'
+				elif core == ':function':
+					type_node = None
+					identifier_type = None
+					type_check = None
 
-				if len(rule) == 1:
-					if not parent.type:
-						parent.type = self.check_type(parent.children[rule[0]])
+					if rule:
+						type_node = parent.children[rule[0]]
+
+					if type_node:
+						identifier_type = type_node.core[2]
+						type_check = self.check_type(type_node)
+
+					identifier = parent.children[1].core[2]
+
+					if identifier in self.__identifier_table.keys():
+						if isinstance(self.__identifier_table[identifier], dict):
+							raise SemanticError(f'Function \'{identifier}\' already declared.')
+						
+					self.__identifier_table[identifier] = dict()
+					self.__identifier_table[identifier]['type'] = identifier_type
+
+					if parent.rule == 0 or parent.rule == 1:
+						args_node = parent.children[3]
+						args_types = self.check_type(args_node)
+						self.__identifier_table[identifier]['args_types'] = args_types
+
+					parent.type = type_check
+
+				if rule:
+					if len(rule) == 1:
+						if not parent.type:
+							parent.type = self.check_type(parent.children[rule[0]])
 				
 				if len(parent.children) > 1:
 					self.check_children(parent)
@@ -182,13 +211,26 @@ class SemanticAnalyser:
 		elif core == 'identifier':
 			identifier = parent.core[2]
 			if identifier in self.__identifier_table.keys():
-				parent.type = self.__rules['rules'][self.__identifier_table[identifier]]['type']
-				return parent.type
+				if not isinstance(self.__identifier_table[identifier], dict):
+					parent.type = self.__rules['rules'][self.__identifier_table[identifier]]['type']
+					return parent.type
 			else:
 				raise SemanticError(f'Variable \'{identifier}\' referenced before assignment.')
 		elif core == 'type':
 			parent.type = self.__rules['rules'][parent.core[2]]['type']
 			return parent.type
+		elif core == ':args':
+			nodes = []
+			nodes.append(parent.children[0].children[0].core[2])
+			if parent.rule == 0:
+				nodes.extend(self.check_type(parent.children[1]))
+			return nodes
+		elif core == ':argses':
+			nodes = []
+			nodes.append(parent.children[1].children[0].core[2])
+			if parent.rule == 0:
+				nodes.extend(self.check_type(parent.children[2]))
+			return nodes
 		else: 
 			self.check_children(parent)
 	

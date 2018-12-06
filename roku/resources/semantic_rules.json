@@ -7,6 +7,15 @@
 				[5]
 			]
 		},
+		":function": {
+			"final": false,
+			"options": [
+				[6],
+				null,
+				[5],
+				null
+			]
+		},
 		":declaration": {
 			"final": false,
 			"options": [
