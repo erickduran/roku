@@ -27,6 +27,19 @@ This compiler was implemented using __Python 3__ (3.7.0) and it is designed for 
 pip install click
 ```
 
+### Usage
+To compile using the __roku__ compiler, use the following command:
+
+```bash
+python roku.py [OPTIONS] SOURCE_FILE
+```
+Options can be used to track each of the steps of the compiling process. For example, use:
+
+```bash
+python roku.py --ast ../tests/test_source.fang
+```
+This will compile the input source file and print the corresponding generated abstract syntax tree.
+
 ### What everything means
 
 __Terminals__ | __Actual meaning__
