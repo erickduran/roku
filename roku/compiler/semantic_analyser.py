@@ -108,6 +108,7 @@ class SemanticAnalyser:
 							raise TypeError(f'\'{initial_type}\' not compatible with \'{operator}\' operator.')
 					parent.type = initial_type
 				elif core == ':logical_value':
+					# print(parent.children[rule[0]].core)
 					value_type = self.check_type(parent.children[rule[0]])
 					if value_type != 'BOOLEAN':
 						raise TypeError(f'\'{value_type}\' not compatible with \'BOOLEAN\'.')
