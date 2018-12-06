@@ -15,7 +15,6 @@ bend test4() {
 }
 
 bend energy(): zhuli {
-	zhuli a = test2(5, 4);
-	a = 4 + test3();
+	test2(5, 4);
 	yipyip 0;
 }

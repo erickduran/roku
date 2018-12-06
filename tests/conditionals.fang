@@ -1,6 +1,5 @@
 bend energy(): zhuli {
-	scroll test;
-	zhuli j = 0 + 2;
+	zhuli j = 0;
 	zhuli i = 4;
 	zhuli count = 0;
 	agni ( j <= i/2){
