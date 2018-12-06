@@ -1,0 +1,157 @@
+{	
+	"rules": {
+		":s": {
+			"final": false,
+			"options": [
+				[6],
+				[5]
+			]
+		},
+		":function": {
+			"final": false,
+			"options": [
+				[6],
+				null,
+				[5],
+				null
+			]
+		},
+		":declaration": {
+			"final": false,
+			"options": [
+				[0, 1],
+				[0]
+			]
+		},
+		":assignment": {
+			"final": false,
+			"options": [
+				[2]
+			]
+		},
+		":value": {
+			"final": false,
+			"options": [
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[0]
+			]	
+		},
+		":operating": {
+			"final": false,
+			"options": [
+				[0],
+				[0],
+				[0],
+				[0],
+				[0]
+			]	
+		},
+		":comparing": {
+			"final": false,
+			"options": [
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[0]
+			]	
+		},
+		":number": {
+			"final": false,
+			"options": [
+				[0],
+				[0]
+			]
+		},
+		":operation": {
+			"final": false,
+			"options": [
+				[0, 2, 3],
+				[0, 2]
+			]
+		},
+		":comparison": {
+			"final": false,
+			"options": [
+				[0, 2]
+			]
+		},
+		":operations": {
+			"final": false,
+			"options": [
+				[1, 2],
+				[1]
+			]
+		},
+		":logical": {
+			"final": false,
+			"options": [
+				[0],
+				[0]
+			]
+		},
+		":logical_value": {
+			"final": false,
+			"options": [
+				[0],
+				[0],
+				[0],
+				[0],
+				[0]
+			]
+		},
+		":logical_operation": {
+			"final": false,
+			"options": [
+				[0, 2],
+				[0, 2]
+			]
+		},
+		":negation": {
+			"final": false,
+			"options": [
+				[1]
+			]
+		},
+		"zhuli": {
+			"final": true,
+			"type": "INT"
+		},
+		"appa": {
+			"final": true,
+			"type": "FLOAT"
+		},
+		"scroll": {
+			"final": true,
+			"type": "STRING"
+		},
+		"wan": {
+			"final": true,
+			"type": "CHAR"
+		},
+		"sokka": {
+			"final": true,
+			"type": "NULL"
+		},
+		"koi": {
+			"final": true,
+			"type": "BOOLEAN"
+		}
+	},
+
+	"compatibilities": {
+		"zhuli": ["INT", "NULL"],
+		"appa": ["FLOAT", "INT", "NULL"],
+		"scroll": ["STRING", "NULL"],
+		"wan": ["CHAR", "NULL"],
+		"koi": ["BOOLEAN", "NULL"]
+	}
+}

@@ -1,14 +1,31 @@
 {
 	":s": {
 		"rule_options": [
+			[":functions", "bend", "energy", "arg_start", "arg_end", "colon", "type", "block_start", ":program", "block_end"],
 			["bend", "energy", "arg_start", "arg_end", "colon", "type", "block_start", ":program", "block_end"]
 		]
 	}, 
+
+	":functions":{
+		"rule_options": [
+			[":function", ":functions"],
+			[":function"]
+		]
+	},
 
 	":program": {
 		"rule_options": [
 			[":instruction", ":program"],
 			[":instruction"]
+		]
+	},
+
+	":function": {
+		"rule_options": [
+			["bend", "identifier", "arg_start", ":args", "arg_end", "colon", "type", "block_start", ":program", "block_end"],
+			["bend", "identifier", "arg_start", ":args", "arg_end", "block_start", ":program", "block_end"],
+			["bend", "identifier", "arg_start", "arg_end", "colon", "type", "block_start", ":program", "block_end"],
+			["bend", "identifier", "arg_start", "arg_end", "block_start", ":program", "block_end"]
 		]
 	},
 
@@ -103,21 +120,22 @@
 
 	":call": {
 		"rule_options": [
-			["identifier", "arg_start", ":args_call", "arg_end"]
+			["identifier", "arg_start", ":args_call", "arg_end"],
+			["identifier", "arg_start", "arg_end"]
 		]
 	},
 
 	":args": {
 		"rule_options": [
-			["type", "identifier", ":argses"],
-			["type", "identifier"]
+			[":declaration", ":argses"],
+			[":declaration"]
 		]
 	},
 
 	":argses": {
 		"rule_options": [
-			["comma", "type", "identifier", ":argses"],
-			["comma", "type", "identifier"]
+			["comma", ":declaration", ":argses"],
+			["comma", ":declaration"]
 		]
 	},
 
@@ -140,9 +158,9 @@
 			[":number"],
 			[":operation"],
 			["identifier"],
+			[":call"],
 			[":logical"],
 			["sokka"],
-			[":call"],
 			["scroll"],
 			["wan"]
 		]
@@ -219,6 +237,4 @@
 			["sokka"]
 		]
 	}
-
-
 }

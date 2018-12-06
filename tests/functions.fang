@@ -1,0 +1,20 @@
+bend test(zhuli input): scroll {
+	yipyip sokka;
+}
+
+bend test2(zhuli input, appa erick) {
+	yipyip sokka;
+}
+
+bend test3(): zhuli {
+	yipyip sokka;
+}
+
+bend test4() {
+	yipyip sokka;
+}
+
+bend energy(): zhuli {
+	test2(5, 4);
+	yipyip 0;
+}
