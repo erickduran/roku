@@ -1,6 +1,6 @@
 bend energy(): zhuli {
 	zhuli delta = 0;
-	scroll hola;
+	scroll hola 0;
 	wan x = 's' + 's';
 
 	yipyip sokka;

@@ -7,7 +7,7 @@ bend energy(): zhuli {
 	cabbage;
 	koi erick;
 	delta = 10;
-	hola = "hola" + "erick";
+	hola = "hola" + 5;
 	appa y = 1;
 	y = y + 4;
 	erick = tui || la;

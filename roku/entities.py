@@ -1,3 +1,10 @@
+# entities.py
+"""This is a class where general entity classes will be declared.
+
+The main objective of this class is to provide a place where simple
+entities can be declared and referenced from.
+
+"""
 class Node:
 	def __init__(self, core):
 		self.core = core

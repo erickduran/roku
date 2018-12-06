@@ -10,7 +10,7 @@ import json
 import re
 import collections
 
-from errors import InvalidCharacterError
+from errors import InvalidCharacterError, EmptyFileError
 
 
 class LexicalAnalyser:
