@@ -80,7 +80,7 @@ class TupleGenerator:
 				context.append(result)
 
 	def assignment_tuple(self, value, name):
-		return ('assign', value, '-', name)
+		return ('assign', value, None, name)
 	
 	def declare(self, node, context):
 		if node.rule == 0:

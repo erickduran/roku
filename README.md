@@ -11,13 +11,21 @@ A compiler for a simple "domestic" programming language inspired by _Avatar: The
 * A compiler for a day-to-day use programming language.
 
 ### Status
-The current status of this project is __IN PROGRESS__.
+The current status of this project is __DONE__. This includes:
+* Lexical analyser
+* Syntax analyser
+* Semantic analyser
+* Middle code tuples
 
 ### Version
 This repository stores v1.0 of the  __roku__ compiler.
 
 ### Prerequisites
-This compiler was implemented using __Python 3__ (3.7.0) and it is designed for it. You will need to have this installed prior to usage.
+This compiler was implemented using __Python 3__ (3.7.0) and it is designed for it. You will need to have this installed prior to usage, along with the __click__ library. To install this, use the following command:
+
+```bash
+pip install click
+```
 
 ### What everything means
 
