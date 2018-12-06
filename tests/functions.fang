@@ -3,11 +3,10 @@ bend test(zhuli input): scroll {
 }
 
 bend test2(zhuli input, appa erick) {
-	zhuli test = 1;
 	yipyip sokka;
 }
 
-bend test3(): scroll {
+bend test3(): zhuli {
 	yipyip sokka;
 }
 
@@ -16,6 +15,6 @@ bend test4() {
 }
 
 bend energy(): zhuli {
-	zhuli test2 = 1;
+	test2(5, 4);
 	yipyip 0;
 }

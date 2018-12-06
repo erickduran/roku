@@ -1,4 +1,7 @@
 bend energy(): zhuli {
+	zhuli j = 0;
+	zhuli i = 4;
+	zhuli count = 0;
 	agni ( j <= i/2){
 		count = count + 1;
 	}

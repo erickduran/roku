@@ -9,6 +9,6 @@ bend energy(): zhuli {
 	delta = 10;
 	hola = "hola" + "erick";
 	appa y = 1;
-	y = y + 4 + 1;
+	y = y + 4;
 	erick = tui || la;
 }

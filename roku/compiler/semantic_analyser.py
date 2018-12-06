@@ -42,6 +42,7 @@ class SemanticAnalyser:
 					if identifier in self.__identifier_table.keys():
 						if not isinstance(self.__identifier_table[identifier], dict):
 							raise SemanticError(f'Variable \'{identifier}\' already declared.')
+						raise SemanticError(f'Identifier \'{identifier}\' already used in function.')
 
 					self.__identifier_table[identifier] = parent.children[rule[0]].core[2]
 					if parent.rule == 0:
@@ -69,11 +70,11 @@ class SemanticAnalyser:
 					operator = parent.children[1].core[2]
 
 					if parent.rule == 0:
-						rule = rule[:-1]
+						raise SemanticError('Operations with more than 2 elements are currently not supported.')
 
 					for element in rule:
-							node = parent.children[element]
-							types.append(self.check_type(node))
+						node = parent.children[element]
+						types.append(self.check_type(node))
 
 					initial_type = None
 					
@@ -103,59 +104,14 @@ class SemanticAnalyser:
 					if operator != '+':
 						if operator == '%' and initial_type != 'INT':
 							raise TypeError(f'\'{initial_type}\' not compatible with \'{operator}\' operator.')
-						if initial_type != 'INT' or initial_type != 'FLOAT':
+						if initial_type != 'INT' and initial_type != 'FLOAT':
 							raise TypeError(f'\'{initial_type}\' not compatible with \'{operator}\' operator.')
-					
-					if parent.rule == 0:
-						other_operation = parent.children[3]
-						other_operator = other_operation.children[0].core[2]
-						other_operating_type = self.check_type(other_operation.children[1])
-
-						if other_operating_type != 'FLOAT' and other_operating_type != 'STRING' and other_operating_type != 'CHAR' and other_operating_type != 'INT':
-							raise TypeError(f'Type \'{other_operating_type}\' not compatible with operation.')
-
-						types = [initial_type, other_operating_type]
-						second_type = None
-
-						if 'FLOAT' in types:
-							if 'CHAR' not in types and 'STRING' not in types:
-								second_type = 'FLOAT'
-							else:
-								raise TypeError(f'\'CHAR|STRING\' not compatible with \'FLOAT\'.')
-						elif 'STRING' in types:
-							for element in types:
-								if element != 'STRING':
-									raise TypeError(f'\'{element}\' not compatible with \'STRING\'.')
-							second_type = 'STRING'
-						elif 'CHAR' in types:
-							for element in types:
-								if element != 'CHAR':
-									raise TypeError(f'\'{element}\' not compatible with \'CHAR\'.')
-							second_type = 'CHAR'
-						elif 'INT' in types:
-							for element in types:
-								if element != 'INT':
-									raise TypeError(f'\'{element}\' not compatible with \'INT\'.')
-							second_type = 'INT'
-						else:
-							raise TypeError(f'Type not compatible with operation.')
-						
-						if operator != '+':
-							if operator == '%' and second_type != 'INT':
-								raise TypeError(f'\'{second_type}\' not compatible with \'{operator}\' operator.')
-							if second_type != 'INT' or second_type != 'FLOAT':
-								raise TypeError(f'\'{second_type}\' not compatible with \'{operator}\' operator.')
-
-						parent.type = second_type
-
-					else:
-						parent.type = initial_type
-				elif core == ':logical_operation':
-					parent.type = 'BOOLEAN'
+					parent.type = initial_type
 				elif core == ':logical_value':
+					print(parent.children[rule[0]].core)
 					value_type = self.check_type(parent.children[rule[0]])
 					if value_type != 'BOOLEAN':
-						raise TypeError(f'\'{value_type}\' not compatible with \'{operator}\' operator.')
+						raise TypeError(f'\'{value_type}\' not compatible with \'BOOLEAN\'.')
 					parent.type = value_type		
 				elif core == ':comparison':
 					types = []
@@ -174,7 +130,7 @@ class SemanticAnalyser:
 					parent.type = 'BOOLEAN'
 				elif core == ':function':
 					type_node = None
-					identifier_type = None
+					identifier_type = 'sokka'
 					type_check = None
 
 					if rule:
@@ -189,6 +145,7 @@ class SemanticAnalyser:
 					if identifier in self.__identifier_table.keys():
 						if isinstance(self.__identifier_table[identifier], dict):
 							raise SemanticError(f'Function \'{identifier}\' already declared.')
+						raise SemanticError(f'Identifier \'{identifier}\' already used in variable.')
 						
 					self.__identifier_table[identifier] = dict()
 					self.__identifier_table[identifier]['type'] = identifier_type
@@ -199,7 +156,8 @@ class SemanticAnalyser:
 						self.__identifier_table[identifier]['args_types'] = args_types
 
 					parent.type = type_check
-
+				elif core == ':logical_operation':
+					parent.type = 'BOOLEAN'
 				if rule:
 					if len(rule) == 1:
 						if not parent.type:
@@ -207,6 +165,7 @@ class SemanticAnalyser:
 				
 				if len(parent.children) > 1:
 					self.check_children(parent)
+
 				return parent.type
 		elif core == 'identifier':
 			identifier = parent.core[2]
@@ -231,9 +190,41 @@ class SemanticAnalyser:
 			if parent.rule == 0:
 				nodes.extend(self.check_type(parent.children[2]))
 			return nodes
+		elif core == ':call':
+			identifier = parent.children[0].core[2]
+			if identifier in self.__identifier_table.keys():
+				if isinstance(self.__identifier_table[identifier], dict):
+					if 'args_types' in self.__identifier_table[identifier].keys():
+						expected_args = self.__identifier_table[identifier]['args_types']
+						if parent.rule == 0:
+							args_raw_types = self.check_type(parent.children[2])
+							if len(args_raw_types) != len(expected_args):
+								raise SemanticError(f'Missing arguments for functions, expected: {str(expected_args)}.')
+							for i, arg_type in enumerate(args_raw_types):
+								if arg_type not in self.__rules['compatibilities'][expected_args[i]]:
+									raise TypeError(f'Incompatible arguments in call, expected: {str(expected_args)}.')
+						else:
+							raise SemanticError(f'Missing arguments for functions, expected: {str(expected_args)}.')
+					function_type = self.__identifier_table[identifier]['type']
+					parent.type = self.__rules['rules'][function_type]['type']
+					return parent.type
+			raise SemanticError(f'Function \'{identifier}\' not declared.')
+		elif core == ':args_call':
+			nodes = []
+			nodes.append(self.check_type(parent.children[0]))
+			if parent.rule == 0:
+				nodes.extend(self.check_type(parent.children[1]))
+			return nodes
+		elif core == ':args_calls':
+			nodes = []
+			nodes.append(self.check_type(parent.children[1]))
+			if parent.rule == 0:
+				nodes.extend(self.check_type(parent.children[2]))
+			return nodes
 		else: 
 			self.check_children(parent)
-	
+		
+
 	def check_children(self, parent):
 		for child in parent.children:
 			if not child.type:

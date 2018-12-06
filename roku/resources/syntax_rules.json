@@ -120,7 +120,8 @@
 
 	":call": {
 		"rule_options": [
-			["identifier", "arg_start", ":args_call", "arg_end"]
+			["identifier", "arg_start", ":args_call", "arg_end"],
+			["identifier", "arg_start", "arg_end"]
 		]
 	},
 
@@ -157,9 +158,9 @@
 			[":number"],
 			[":operation"],
 			["identifier"],
+			[":call"],
 			[":logical"],
 			["sokka"],
-			[":call"],
 			["scroll"],
 			["wan"]
 		]
