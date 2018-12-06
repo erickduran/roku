@@ -255,7 +255,7 @@ class TupleGenerator:
 		if node.rule == 1:
 			self.create_agnikai_tuples(node.children[1], context, block_end_label)
 		if node.rule == 2:
-			self.create_kai_tuples(node.children[1])
+			self.create_kai_tuples(node.children[1], context)
 
 		return block_end_label
 
