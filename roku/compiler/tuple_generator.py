@@ -56,7 +56,7 @@ class TupleGenerator:
 		if parent.core == ':declaration':
 			return self.declare(parent, context)
 		if parent.core == ':call':
-			return self.create_function_call_tuples(parent, context)
+			self.create_function_call_tuples(parent, context)
 		if parent.core == ':assignment':
 			return self.assignment_tuple(self.get_value(parent.children[2], context), parent.children[0].core[2])
 		if parent.core == ':flow':
@@ -68,12 +68,16 @@ class TupleGenerator:
 				return self.while_block(parent.children[0], context)
 
 	def program_tuples(self, parent, context):
-		context.append(self.create_instruction_tuples(parent.children[0], context))
+		result = self.create_instruction_tuples(parent.children[0], context)
+		if result:
+			context.append(result)
 		
 		child = parent
 		while child.rule == 0:
 			child = child.children[1]
-			context.append(self.create_instruction_tuples(child.children[0], context))
+			result = self.create_instruction_tuples(child.children[0], context)
+			if result:
+				context.append(result)
 
 	def assignment_tuple(self, value, name):
 		return ('assign', value, '-', name)
@@ -104,7 +108,7 @@ class TupleGenerator:
 					arg_count += 1
 
 		# Make call
-		return self.run_tuple(node.children[0].core[2])
+		context.append(self.run_tuple(node.children[0].core[2]))
 
 	def get_value(self, node, context):
 		if node.rule == 0: # Number
